@@ -46,9 +46,10 @@ public class JdItem implements Serializable {
     private String url;
 
     //'创建时间'
-    @TableField(value ="createTime" ,fill = FieldFill.INSERT)
+    @TableField(fill = FieldFill.INSERT)
     private Date createTime;
     //'更新时间'
-    @TableField(value ="updateTime" ,fill = FieldFill.UPDATE)
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime ;
+
 }

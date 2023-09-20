@@ -33,11 +33,13 @@ public class JdTemTask {
     @Autowired
     private HttpUtils httpUtils;
 
-    public static final String BASIC_JD_URL = "https://search.jd.com/Search?keyword=%E6%89%8B%E6%9C%BA&wq=%E6%89%8B%E6%9C%BA&pvid=8858151673f941e9b1a4d2c7214b2b52&isList=0&s=56&click=0&log_id=1695115334958.3399&page=3";
+    public static final String BASIC_JD_URL = "https://search.jd.com/Search?keyword=%E6%89%8B%E6%9C%BA&wq=%E6%89%8B%E6%9C%BA&pvid=8858151673f941e9b1a4d2c7214b2b52&isList=0&s=56&click=0&log_id=1695175554657.7518&page=3";
 
     /**
      * 目标页面:
      * https://search.jd.com/Search?keyword=%E6%89%8B%E6%9C%BA&wq=%E6%89%8B%E6%9C%BA&pvid=8858151673f941e9b1a4d2c7214b2b52&isList=0&page=3&s=56&click=0&log_id=1695115334958.3399
+     *
+     * https://search.jd.com/Search?keyword=%E6%89%8B%E6%9C%BA&wq=%E6%89%8B%E6%9C%BA&pvid=8858151673f941e9b1a4d2c7214b2b52&isList=0&page=3&s=56&click=0&log_id=1695175554657.7518
      */
     //下载任务完成后,每个多长时间再次下载
     @Scheduled(fixedDelay = 100*1000)
@@ -55,7 +57,6 @@ public class JdTemTask {
         System.out.println("手机数据抓取完成！！");
 
     }
-
     //解析页面获取数据,并存储
     private void parseHtml(Document document) {
         //解析页面
@@ -63,10 +64,14 @@ public class JdTemTask {
         //获取spu
         Elements spuElements = document.select("div#J_goodsList > ul > li");
         for (Element spuElement : spuElements) {
+            //分析 ware-type=0的属性是没有spu的
+            Elements elements = spuElement.select("[ware-type=0]");
+            if (elements.size()>0){
+                continue;
+            }
             //获取spu
             long spu = Long.parseLong(spuElement.attr("data-spu"));
-            //获取sku
-            long sku = Long.parseLong(spuElements.attr("data-sku"));
+
             //根据sku查询数据库商品
             List<JdItem> jdItemsList = jdItemService.list(new LambdaQueryWrapper<JdItem>().eq(JdItem::getSku,spu));
             if (jdItemsList.size()>0){
@@ -77,9 +82,9 @@ public class JdTemTask {
             JdItem jdItems = new JdItem();
             //设置商品spu
             jdItems.setSpu(spu);
+            jdItems.setSku(jdItems.getSpu());
             //设置商品详情页面地址
             //https://item.jd.com/100057334060.html
-            //https://item.jd.com/100034710036.html
             String JdItemUrl = "https://item.jd.com/"+spu+".html";
             jdItems.setUrl(JdItemUrl);
 
@@ -90,8 +95,7 @@ public class JdTemTask {
                 String picUrl = image.select("[data-lazy-img]").text();
                //替换n7为n1
                 String newPicUrl ="https:"+ picUrl.replace("/n7/", "/n1/");
-                String picImages = httpUtils.doGetHtml(newPicUrl);
-                jdItems.setPic(picImages);
+                jdItems.setPic(newPicUrl);
             }
             //设置商品价格
             String price = spuElement.select("div.p-price > strong").text();
