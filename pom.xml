@@ -13,6 +13,7 @@
         <module>itcast-crawler-first</module>
         <module>itcast-crawler-jd</module>
         <module>itcast-crawler-webmagic</module>
+        <module>itcast-crawler-webmagic-jd</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

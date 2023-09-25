@@ -3,7 +3,6 @@ package com.liuqiang.webmagic;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
-import us.codecraft.webmagic.pipeline.FilePipeline;
 import us.codecraft.webmagic.processor.PageProcessor;
 
 /**
@@ -43,7 +42,6 @@ public class Test01 implements PageProcessor {
         Spider.create(new Test01())
                 .addUrl("https://list.jd.com/list.html?cat=9192,9196,14697")
                 .thread(10)
-                .addPipeline(new FilePipeline("C:\\Users\\liuqiang132\\Desktop\\java-web-crawler\\itcast-crawler-webmagic\\src\\main\\resources\\pip"))
                 .run();
 
     }
