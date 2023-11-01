@@ -1,4 +1,4 @@
-package com.liuqiang.webmagic;
+package com.liuqiang.webmagic.pageprocessor;
 
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
@@ -11,7 +11,7 @@ import us.codecraft.webmagic.processor.PageProcessor;
  * @description: webMagic入门案例---实现PageProcessor接口
  * @date 2023/9/25 15:22
  */
-public class Test01 implements PageProcessor {
+public class JsoupTest03 implements PageProcessor {
 
     //解析页面
     @Override
@@ -39,7 +39,7 @@ public class Test01 implements PageProcessor {
     }
 
     public static void main(String[] args) {
-        Spider.create(new Test01())
+        Spider.create(new JsoupTest03())
                 .addUrl("https://list.jd.com/list.html?cat=9192,9196,14697")
                 .thread(10)
                 .run();

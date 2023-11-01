@@ -3,6 +3,9 @@ package com.liuqiang.webmagic.webmagic;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.processor.PageProcessor;
+import us.codecraft.webmagic.selector.Html;
+
+import java.util.List;
 
 /**
  * @author liuqiang132
@@ -14,6 +17,9 @@ public class JDPage implements PageProcessor {
     //解析京东商城页面 目标页面：https://list.jd.com/list.html?cat=9192,9196,1506
     @Override
     public void process(Page page) {
+        Html jdHtml = page.getHtml();
+        List<String> all = jdHtml.css("div#Jd_goods").all();
+        System.out.println(all);
 
 
     }

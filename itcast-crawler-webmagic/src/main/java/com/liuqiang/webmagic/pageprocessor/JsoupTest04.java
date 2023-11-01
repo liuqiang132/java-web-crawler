@@ -1,4 +1,4 @@
-package com.liuqiang.webmagic;
+package com.liuqiang.webmagic.pageprocessor;
 
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
@@ -14,9 +14,9 @@ import java.util.List;
  * @description: webMagic入门案例---淘宝数据
  * @date 2023/9/25 15:30
  */
-public class Test02 implements PageProcessor {
+public class JsoupTest04 implements PageProcessor {
     public static void main(String[] args) {
-        Spider.create(new Test02())
+        Spider.create(new JsoupTest04())
                 .addUrl("https://s.taobao.com/search?q=%E5%86%85%E8%A1%A3&spm=a21bo.jianhua.201867-main.2.5af92a891EfGU4") //目标网站
                 .thread(10) //使用线程数
                 .run(); //启动

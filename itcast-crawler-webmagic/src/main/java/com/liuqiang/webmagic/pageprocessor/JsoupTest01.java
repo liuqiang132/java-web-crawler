@@ -1,4 +1,4 @@
-package com.liuqiang.webmagic;
+package com.liuqiang.webmagic.pageprocessor;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -14,7 +14,7 @@ import java.util.Map;
  * @description: JsoupTest京东商城商品信息
  * @date 2023/9/25 15:55
  */
-public class JsoupJDTest01 {
+public class JsoupTest01 {
     public static void main(String[] args) throws Exception {
 
         Map<String, String> map = new HashMap<>();

@@ -10,9 +10,19 @@ import us.codecraft.webmagic.model.annotation.TargetUrl;
  * @date 2023/9/25 17:47
  */
 @TargetUrl("https://list.jd.com/list.html?cat=9192,9196,14697")
-public class JDRepo {
+public class AnnotationJDRepo {
     @ExtractBy(value = "//div[@id=J_goodsList]/ul/li/div/a/text()",notNull = true)
     private String title;
 
+
+    @ExtractBy(value = "",notNull = true)
+    private String name;
+
+
+    @ExtractBy(value = "",notNull = true)
+    private String price;
+
+    @ExtractBy(value = "",notNull = true)
+    private String url;
 
 }

@@ -1,4 +1,4 @@
-package com.liuqiang.webmagic;
+package com.liuqiang.webmagic.pageprocessor;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -13,7 +13,7 @@ import java.util.Map;
  * @description: 淘宝商品
  * @date 2023/9/25 18:18
  */
-public class TAOBAOTest02 {
+public class JsoupTest02 {
     public static void main(String[] args) throws IOException {
         //获取页面
         Map<String,String> map = new HashMap<>();
